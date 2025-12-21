@@ -78,7 +78,7 @@ const Navbar = () => {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="glass-navbar w-auto max-w-4xl flex items-center gap-2 md:gap-6"
+      className="glass-navbar w-auto max-w-4xl flex items-center justify-center gap-2 md:gap-6"
     >
       {/* Logo */}
       <button 
