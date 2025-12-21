@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion';
-import { Moon, Sun, Menu, Languages } from 'lucide-react';
+import { Moon, Sun, Menu } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
+import { useState, useEffect } from 'react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,17 +16,61 @@ const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
   const { language, toggleLanguage, t } = useLanguage();
   const location = useLocation();
+  const [activeSection, setActiveSection] = useState('home');
   
   const navItems = [
-    { key: 'home', path: '/' },
-    { key: 'projects', path: '/#projects' },
-    { key: 'blog', path: '/blog' },
-    { key: 'contact', path: '/#contact' },
+    { key: 'home', sectionId: 'home' },
+    { key: 'projects', sectionId: 'projects' },
+    { key: 'skills', sectionId: 'skills' },
+    { key: 'contact', sectionId: 'contact' },
   ];
   
-  const isActive = (path: string) => {
-    if (path === '/') return location.pathname === '/';
-    return location.pathname.startsWith(path.replace('#', ''));
+  // Scroll to section handler
+  const scrollToSection = (sectionId: string) => {
+    if (sectionId === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+  
+  // Track active section based on scroll position
+  useEffect(() => {
+    if (location.pathname !== '/') return;
+    
+    const handleScroll = () => {
+      const sections = ['contact', 'skills', 'projects', 'home'];
+      const scrollPosition = window.scrollY + 200;
+      
+      for (const sectionId of sections) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const offsetTop = element.offsetTop;
+          if (scrollPosition >= offsetTop) {
+            setActiveSection(sectionId);
+            break;
+          }
+        }
+      }
+      
+      // If at top, set home as active
+      if (window.scrollY < 100) {
+        setActiveSection('home');
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial check
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [location.pathname]);
+  
+  const isActive = (sectionId: string) => {
+    if (location.pathname !== '/') return false;
+    return activeSection === sectionId;
   };
   
   return (
@@ -36,26 +81,29 @@ const Navbar = () => {
       className="glass-navbar w-auto max-w-4xl flex items-center gap-2 md:gap-6"
     >
       {/* Logo */}
-      <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+      <button 
+        onClick={() => scrollToSection('home')} 
+        className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+      >
         <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
           <span className="text-primary-foreground font-display font-bold text-sm">A</span>
         </div>
-      </Link>
+      </button>
       
       {/* Navigation Links - Desktop */}
       <div className="hidden md:flex items-center gap-1">
         {navItems.map(item => (
-          <Link
+          <button
             key={item.key}
-            to={item.path}
+            onClick={() => scrollToSection(item.sectionId)}
             className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all ${
-              isActive(item.path) 
+              isActive(item.sectionId) 
                 ? 'bg-primary text-primary-foreground' 
                 : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
             }`}
           >
             {t(item.key)}
-          </Link>
+          </button>
         ))}
       </div>
       
@@ -100,10 +148,12 @@ const Navbar = () => {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="glass-card border-0 mt-2">
           {navItems.map(item => (
-            <DropdownMenuItem key={item.key} asChild>
-              <Link to={item.path} className="cursor-pointer">
-                {t(item.key)}
-              </Link>
+            <DropdownMenuItem 
+              key={item.key} 
+              onClick={() => scrollToSection(item.sectionId)}
+              className="cursor-pointer"
+            >
+              {t(item.key)}
             </DropdownMenuItem>
           ))}
           <DropdownMenuItem asChild>
