@@ -147,12 +147,15 @@ const Navbar = () => {
             <Menu className="h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="glass-card border-0 mt-2">
+        <DropdownMenuContent
+          align={language === "ar" ? "start" : "end"}
+          className="glass-card border-0 mt-2"
+        >
           {navItems.map((item) => (
             <DropdownMenuItem
               key={item.key}
               onClick={() => scrollToSection(item.sectionId)}
-              className="cursor-pointer"
+              className="cursor-pointer justify-center"
             >
               {t(item.key)}
             </DropdownMenuItem>

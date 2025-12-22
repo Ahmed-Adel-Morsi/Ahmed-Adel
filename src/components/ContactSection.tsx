@@ -10,13 +10,30 @@ const ContactSection = () => {
   const { t, direction } = useLanguage();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    const subject =
+      direction === "rtl"
+        ? `رسالة جديدة من ${name || "زائر"}`
+        : `New message from ${name || "Visitor"}`;
+
+    const body =
+      (direction === "rtl" ? "تفاصيل الرسالة:\n\n" : "Message details:\n\n") +
+      `${direction === "rtl" ? "الاسم" : "Name"}: ${name}\n` +
+      `${direction === "rtl" ? "البريد الإلكتروني" : "Email"}: ${email}\n\n` +
+      `${direction === "rtl" ? "الرسالة" : "Message"}:\n${message}`;
+
+    const mailtoLink = `mailto:ahmedadel0239@gmail.com?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+
+    window.location.href = mailtoLink;
 
     toast({
       title: direction === "rtl" ? "تم الإرسال!" : "Message sent!",
@@ -62,6 +79,8 @@ const ContactSection = () => {
                   required
                   className="rounded-lg bg-secondary/50 border-border focus:border-primary"
                   dir={direction}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                 />
               </div>
               <div>
@@ -77,6 +96,8 @@ const ContactSection = () => {
                   required
                   className="rounded-lg bg-secondary/50 border-border focus:border-primary"
                   dir="ltr"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
             </div>
@@ -94,37 +115,78 @@ const ContactSection = () => {
                 required
                 className="rounded-lg bg-secondary/50 border-border focus:border-primary resize-none"
                 dir={direction}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
               />
             </div>
 
-            <Button
-              type="submit"
-              size="lg"
-              disabled={isSubmitting}
-              className={`glow-button rounded-full px-8 ${
-                direction === "rtl" ? "float-left" : ""
+            <div
+              className={`flex ${
+                direction === "rtl" ? "justify-start" : "justify-start"
               }`}
             >
-              {isSubmitting && (
+              <Button
+                type="submit"
+                size="lg"
+                disabled={isSubmitting}
+                className="glow-button rounded-full px-8"
+              >
+                {t("sendMessage")}
+              </Button>
+            </div>
+
+            <div className="mt-6 flex items-center justify-center gap-6 text-muted-foreground">
+              <a
+                href="https://github.com/Ahmed-Adel-Morsi"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="GitHub"
+                className="hover:text-primary transition-colors"
+              >
                 <svg
-                  aria-hidden="true"
-                  className="w-12 h-12 text-neutral-tertiary animate-spin fill-white"
-                  viewBox="0 0 100 101"
-                  fill="none"
                   xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  className="h-6 w-6"
+                  fill="currentColor"
                 >
-                  <path
-                    d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                    fill="currentColor"
-                  />
-                  <path
-                    d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                    fill="currentFill"
-                  />
+                  <path d="M12 0C5.37 0 0 5.37 0 12a12 12 0 0 0 8.21 11.44c.6.11.82-.26.82-.58 0-.29-.01-1.04-.02-2.05-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.74.08-.74 1.2.09 1.83 1.24 1.83 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.34-5.47-5.96 0-1.32.47-2.39 1.24-3.24-.12-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.4 11.4 0 0 1 3-.4c1.02 0 2.05.14 3 .4 2.29-1.55 3.29-1.23 3.29-1.23.67 1.65.25 2.87.13 3.17.77.85 1.23 1.92 1.23 3.24 0 4.63-2.81 5.66-5.49 5.96.43.37.81 1.1.81 2.22 0 1.6-.01 2.88-.01 3.27 0 .32.21.7.82.58A12 12 0 0 0 24 12C24 5.37 18.63 0 12 0Z" />
                 </svg>
-              )}
-              {t("sendMessage")}
-            </Button>
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/ahmed-adel-morsi"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="LinkedIn"
+                className="hover:text-primary transition-colors"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  className="h-6 w-6"
+                  fill="currentColor"
+                >
+                  <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.3 8.13h4.4V24H.3V8.13zM8.55 8.13h4.22v2.16h.06c.59-1.12 2.03-2.3 4.18-2.3 4.47 0 5.29 2.94 5.29 6.76V24h-4.4v-7.32c0-1.75-.03-4-2.44-4-2.44 0-2.82 1.9-2.82 3.86V24h-4.4V8.13z" />
+                </svg>
+              </a>
+
+              <a
+                href="http://wa.me/+201019540239"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="WhatsApp"
+                className="hover:text-primary transition-colors"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  className="h-6 w-6"
+                  fill="currentColor"
+                >
+                  <path d="M20.52 3.48A11.86 11.86 0 0 0 12 0C5.38 0 .06 5.32.06 11.93c0 2.1.55 4.14 1.6 5.95L0 24l6.29-1.64a12.06 12.06 0 0 0 5.71 1.45h.01c6.62 0 11.93-5.32 11.94-11.93 0-3.19-1.24-6.19-3.43-8.4Zm-8.52 18.4h-.01a9.93 9.93 0 0 1-5.06-1.39l-.36-.21-3.73.97.99-3.64-.24-.37a9.83 9.83 0 0 1-1.52-5.25C2.57 6.43 6.79 2.2 12 2.2c2.64 0 5.12 1.03 6.98 2.9a9.77 9.77 0 0 1 2.89 6.97c-.01 5.23-4.27 9.51-9.47 9.51Zm5.2-7.13c-.28-.14-1.65-.81-1.9-.9-.25-.09-.43-.14-.61.14-.18.28-.7.9-.86 1.08-.16.18-.32.2-.6.07-.28-.14-1.18-.43-2.25-1.37-.83-.74-1.39-1.66-1.55-1.94-.16-.28-.02-.43.12-.57.13-.13.28-.34.41-.51.14-.17.18-.29.27-.48.09-.19.05-.36-.02-.5-.07-.14-.61-1.47-.84-2.02-.22-.53-.45-.46-.61-.47l-.52-.01c-.19 0-.5.07-.76.34-.26.28-1 1-1 2.43s1.02 2.82 1.16 3.01c.14.19 2 3.06 4.84 4.29.68.29 1.21.46 1.62.59.68.22 1.3.19 1.79.11.55-.08 1.65-.67 1.89-1.31.23-.64.23-1.19.16-1.31-.07-.12-.25-.19-.53-.33Z" />
+                </svg>
+              </a>
+            </div>
           </form>
         </motion.div>
       </div>

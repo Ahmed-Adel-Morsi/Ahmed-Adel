@@ -35,20 +35,41 @@ const translations: Translations = {
   // Projects
   myProjects: { en: "My Projects", ar: "مشاريعي" },
   viewDetails: { en: "View Details", ar: "عرض التفاصيل" },
-  ecommerce: { en: "E-Commerce App", ar: "تطبيق تجارة إلكترونية" },
-  ecommerceDesc: { en: "Online shopping platform", ar: "منصة تسوق إلكترونية" },
-  taskManager: { en: "Task Manager", ar: "مدير المهام" },
-  taskManagerDesc: { en: "Productivity Tool", ar: "أداة إنتاجية" },
-  portfolioWebsite: { en: "Portfolio Website", ar: "موقع شخصي" },
-  portfolioDesc: { en: "Personal Portfolio", ar: "معرض أعمال شخصي" },
-
+  liveDemo: { en: "Live Demo", ar: "عرض مباشر" },
+  backToProjects: { en: "Back to Projects", ar: "العودة للمشاريع" },
+  projectNotFound: { en: "Project not found", ar: "المشروع غير موجود" },
+  warehouse: { en: "Warehouse Management System", ar: "نظام إدارة مخارن" },
+  warehouseDesc: {
+    en: "Warehouse Management System (ERP)",
+    ar: "نظام إدارة مخارن",
+  },
+  zwaj: { en: "Zwaj Islamy App", ar: "موقع زواج إسلامي" },
+  zwajDesc: {
+    en: "Online Zwaj Islamy platform",
+    ar: "تفاصيل منصة الزواج الإسلامي",
+  },
+  sticky: { en: "Sticky Notes App", ar: "موقع لحفظ ملاحظاتك" },
+  stickyDesc: {
+    en: "Productivity Sticky Notes Tool",
+    ar: "أداة حفظ ملاحظات لزيادة الإنتاجية",
+  },
+  timer: { en: "Countdown Timer & Stopwatch", ar: "عداد تنازلي وساعة إيقاف" },
+  timerDesc: {
+    en: "Timer and Stopwatch Tool",
+    ar: "أداة عداد تنازلي وساعة إيقاف",
+  },
+  landing: { en: "Landing Page", ar: "صفحة هبوط" },
+  landingDesc: {
+    en: "Modern Landing Page",
+    ar: "صفحة هبوط حديثة",
+  },
   // Skills
   skillsTitle: { en: "Skills & Technologies", ar: "المهارات والتقنيات" },
 
   // Contact
   contactTitle: { en: "Get In Touch", ar: "تواصل معي" },
-  yourName: { en: "Your Name", ar: "اسمك" },
-  yourEmail: { en: "Your Email", ar: "بريدك الإلكتروني" },
+  yourName: { en: "Your Name", ar: "الإسم" },
+  yourEmail: { en: "Your Email", ar: "البريد الإلكتروني" },
   message: { en: "Message", ar: "الرسالة" },
   sendMessage: { en: "Send Message", ar: "إرسال الرسالة" },
 
@@ -90,7 +111,7 @@ interface LanguageContextType {
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(
-  undefined,
+  undefined
 );
 
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({

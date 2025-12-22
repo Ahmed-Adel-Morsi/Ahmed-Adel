@@ -1,33 +1,12 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
-import projectEcommerce from "@/assets/project-ecommerce.jpg";
-import projectTaskManager from "@/assets/project-taskmanager.jpg";
-import projectPortfolio from "@/assets/project-portfolio.jpg";
+import { getProjects } from "@/lib/projects";
 
 const ProjectsSection = () => {
   const { t, direction } = useLanguage();
-
-  const projects = [
-    {
-      id: 1,
-      title: t("ecommerce"),
-      description: t("ecommerceDesc"),
-      image: projectEcommerce,
-    },
-    {
-      id: 2,
-      title: t("taskManager"),
-      description: t("taskManagerDesc"),
-      image: projectTaskManager,
-    },
-    {
-      id: 3,
-      title: t("portfolioWebsite"),
-      description: t("portfolioDesc"),
-      image: projectPortfolio,
-    },
-  ];
+  const projects = getProjects(t);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -98,9 +77,32 @@ const ProjectsSection = () => {
                 >
                   {project.description}
                 </p>
-                <Button variant="secondary" size="sm" className="rounded-full">
-                  {t("viewDetails")}
-                </Button>
+                <div className="flex flex-wrap gap-2">
+                  <Button
+                    asChild
+                    variant="secondary"
+                    size="sm"
+                    className="rounded-full"
+                  >
+                    <Link to={`/projects/${project.id}`}>
+                      {t("viewDetails")}
+                    </Link>
+                  </Button>
+                  <Button
+                    asChild
+                    variant="outline"
+                    size="sm"
+                    className="rounded-full hover:bg-primary hover:text-primary-foreground"
+                  >
+                    <a
+                      href={project.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {t("liveDemo")}
+                    </a>
+                  </Button>
+                </div>
               </div>
             </motion.div>
           ))}

@@ -4,8 +4,41 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import heroBg from "@/assets/hero-bg.jpg";
 import profilePhoto from "@/assets/profile-photo.png";
 
+const valuePoints = [
+  {
+    en: "Clean, maintainable, and well-structured code.",
+    ar: "كود نظيف ومنظم وسهل الصيانة.",
+  },
+  {
+    en: "Modern, responsive, and user-focused interfaces.",
+    ar: "واجهات حديثة ومتجاوبة تركز على تجربة المستخدم.",
+  },
+  {
+    en: "Strong problem solving and clear communication.",
+    ar: "قدرات قوية في حل المشكلات والتواصل الواضح.",
+  },
+];
+
+const stats = [
+  {
+    value: "+10",
+    en: "Completed projects",
+    ar: "مشاريع مكتملة",
+  },
+  {
+    value: "+2",
+    en: "Years of learning & building",
+    ar: "سنوات من التعلم والبناء",
+  },
+  {
+    value: "+8",
+    en: "Core technologies",
+    ar: "تقنيات أساسية",
+  },
+];
+
 const HeroSection = () => {
-  const { t, direction } = useLanguage();
+  const { t, direction, language } = useLanguage();
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -32,7 +65,7 @@ const HeroSection = () => {
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-6 pt-24">
-        <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
+        <div className="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16">
           {/* Profile Photo */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -89,10 +122,42 @@ const HeroSection = () => {
               // animate={{ opacity: 1, y: 0 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.6 }}
-              className="text-xl md:text-2xl text-muted-foreground mb-8"
+              className="text-xl md:text-2xl text-primary font-semibold mb-8"
             >
               {t("role")}
             </motion.p>
+
+            {/* Short bio */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.45, duration: 0.6 }}
+              className="text-base md:text-lg text-foreground leading-relaxed mb-5 max-w-xl"
+            >
+              {language === "ar"
+                ? "مطور واجهات أمامية شغوف ببناء مواقع ويب سريعة وحديثة مع التركيز على التجربة البصرية وتجربة المستخدم."
+                : "Frontend developer passionate about building fast, modern web experiences with a strong focus on UI quality and UX."}
+            </motion.p>
+
+            {/* Value proposition points */}
+            <motion.ul
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.55, duration: 0.6 }}
+              className={`mb-8 space-y-2 text-sm text-foreground/90 ${
+                direction === "rtl" ? "pr-1" : "pl-1"
+              }`}
+            >
+              {valuePoints.map((point) => (
+                <li
+                  key={point.en}
+                  className="flex items-start gap-2 text-foreground"
+                >
+                  <span className="mt-[3px] text-primary text-xs">✓</span>
+                  <span>{language === "ar" ? point.ar : point.en}</span>
+                </li>
+              ))}
+            </motion.ul>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -118,6 +183,31 @@ const HeroSection = () => {
               >
                 {t("contactMe")}
               </Button>
+            </motion.div>
+
+            {/* Stats / mini analytics */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.6 }}
+              className="mt-6 flex flex-wrap gap-4 text-sm"
+            >
+              {stats.map((stat) => (
+                <div
+                  key={stat.en}
+                  className="glass-card hover:shadow-none relative overflow-hidden rounded-2xl border border-border/60 bg-background/40 px-4 py-3 text-xs text-muted-foreground/90 shadow-sm backdrop-blur"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-primary/0 opacity-70" />
+                  <div className="relative z-10 flex flex-col">
+                    <span className="text-lg font-semibold text-foreground">
+                      {stat.value}
+                    </span>
+                    <span className="text-[0.7rem]">
+                      {language === "ar" ? stat.ar : stat.en}
+                    </span>
+                  </div>
+                </div>
+              ))}
             </motion.div>
           </motion.div>
         </div>
