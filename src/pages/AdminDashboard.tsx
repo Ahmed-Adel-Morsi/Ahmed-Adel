@@ -2,15 +2,11 @@ import AdminSidebar from "@/components/AdminSidebar";
 import AdminStats from "@/components/AdminStats";
 import AdminProjectsTable from "@/components/AdminProjectsTable";
 import AdminCharts from "@/components/AdminCharts";
-import { useLanguage } from "@/contexts/LanguageContext";
+import Navbar from "@/components/Navbar";
 
 const AdminDashboard = () => {
-  const { direction } = useLanguage();
-
   return (
-    <div
-      className={`min-h-screen bg-background flex ${direction === "rtl" ? "flex-row-reverse" : ""}`}
-    >
+    <div className="min-h-screen bg-background flex">
       <AdminSidebar />
 
       <main className="flex-1 p-6 lg:p-8 overflow-auto">

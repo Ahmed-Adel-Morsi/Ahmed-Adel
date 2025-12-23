@@ -117,7 +117,12 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [language, setLanguage] = useState<Language>("en");
+  const [language, setLanguage] = useState<Language>(
+    (localStorage.getItem("language") as Language) || "en"
+  );
+  useEffect(() => {
+    localStorage.setItem("language", language);
+  }, [language]);
 
   const direction: Direction = language === "ar" ? "rtl" : "ltr";
 

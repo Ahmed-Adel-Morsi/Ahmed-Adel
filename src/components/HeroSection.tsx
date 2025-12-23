@@ -91,9 +91,7 @@ const HeroSection = () => {
             // animate={{ opacity: 1, y: 0 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className={`max-w-2xl ${
-              direction === "rtl" ? "text-right" : "text-left"
-            }`}
+            className="max-w-2xl text-start"
           >
             <motion.p
               initial={{ opacity: 0, x: direction === "rtl" ? 30 : -30 }}
@@ -144,9 +142,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.55, duration: 0.6 }}
-              className={`mb-8 space-y-2 text-sm text-foreground/90 ${
-                direction === "rtl" ? "pr-1" : "pl-1"
-              }`}
+              className="mb-8 space-y-2 text-sm text-foreground/90 ps-1"
             >
               {valuePoints.map((point) => (
                 <li
@@ -164,17 +160,8 @@ const HeroSection = () => {
               // animate={{ opacity: 1, y: 0 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
-              className={`flex gap-4 ${
-                direction === "rtl" ? "flex-row-reverse justify-end" : ""
-              }`}
+              className="flex gap-4"
             >
-              <Button
-                size="lg"
-                onClick={() => scrollToSection("projects")}
-                className="glow-button rounded-full px-8 font-medium"
-              >
-                {t("viewWork")}
-              </Button>
               <Button
                 variant="outline"
                 size="lg"
@@ -182,6 +169,13 @@ const HeroSection = () => {
                 className="rounded-full px-8 font-medium border-border hover:bg-muted/50"
               >
                 {t("contactMe")}
+              </Button>
+              <Button
+                size="lg"
+                onClick={() => scrollToSection("projects")}
+                className="glow-button rounded-full px-8 font-medium"
+              >
+                {t("viewWork")}
               </Button>
             </motion.div>
 

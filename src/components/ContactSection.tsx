@@ -56,39 +56,26 @@ const ContactSection = () => {
           transition={{ duration: 0.6 }}
           className="glass-card p-8 md:p-12"
         >
-          <h2
-            className={`text-3xl md:text-4xl font-display font-bold mb-8 ${
-              direction === "rtl" ? "text-right" : "text-left"
-            }`}
-          >
+          <h2 className="text-3xl md:text-4xl font-display font-bold mb-8 text-start">
             {t("contactTitle")}
           </h2>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label
-                  className={`block text-sm font-medium text-muted-foreground mb-2 ${
-                    direction === "rtl" ? "text-right" : "text-left"
-                  }`}
-                >
+                <label className="block text-sm font-medium text-muted-foreground mb-2 text-start">
                   {t("yourName")}
                 </label>
                 <Input
                   type="text"
                   required
                   className="rounded-lg bg-secondary/50 border-border focus:border-primary"
-                  dir={direction}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
               </div>
               <div>
-                <label
-                  className={`block text-sm font-medium text-muted-foreground mb-2 ${
-                    direction === "rtl" ? "text-right" : "text-left"
-                  }`}
-                >
+                <label className="block text-sm font-medium text-muted-foreground mb-2 text-start">
                   {t("yourEmail")}
                 </label>
                 <Input
@@ -103,28 +90,19 @@ const ContactSection = () => {
             </div>
 
             <div>
-              <label
-                className={`block text-sm font-medium text-muted-foreground mb-2 ${
-                  direction === "rtl" ? "text-right" : "text-left"
-                }`}
-              >
+              <label className="block text-sm font-medium text-muted-foreground mb-2 text-start">
                 {t("message")}
               </label>
               <Textarea
                 rows={5}
                 required
                 className="rounded-lg bg-secondary/50 border-border focus:border-primary resize-none"
-                dir={direction}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
               />
             </div>
 
-            <div
-              className={`flex ${
-                direction === "rtl" ? "justify-start" : "justify-start"
-              }`}
-            >
+            <div className="flex justify-start">
               <Button
                 type="submit"
                 size="lg"

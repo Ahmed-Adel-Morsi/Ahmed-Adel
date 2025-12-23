@@ -34,7 +34,7 @@ const AdminSidebar = () => {
       initial={{ opacity: 0, x: direction === "rtl" ? 50 : -50 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5 }}
-      className={`glass-card w-64 min-h-screen flex flex-col ${direction === "rtl" ? "rounded-l-none rounded-r-2xl" : "rounded-r-2xl rounded-l-none"}`}
+      className="glass-card w-64 min-h-screen flex flex-col rounded-s-none rounded-e-2xl"
     >
       {/* Header */}
       <div className="p-6 border-b border-border">

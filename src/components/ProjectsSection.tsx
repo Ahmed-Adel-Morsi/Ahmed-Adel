@@ -6,7 +6,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { getProjects } from "@/lib/projects";
 
 const ProjectsSection = () => {
-  const { t, direction } = useLanguage();
+  const { t } = useLanguage();
   const projects = getProjects(t);
 
   const containerVariants = {
@@ -36,9 +36,7 @@ const ProjectsSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           // viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className={`text-3xl md:text-4xl font-display font-bold mb-12 ${
-            direction === "rtl" ? "text-right" : "text-left"
-          }`}
+          className="text-3xl md:text-4xl font-display font-bold mb-12 text-start"
         >
           {t("myProjects")}
         </motion.h2>
@@ -64,18 +62,10 @@ const ProjectsSection = () => {
                 />
               </div>
               <div className="p-5">
-                <h3
-                  className={`font-display font-semibold text-lg text-foreground mb-1 ${
-                    direction === "rtl" ? "text-right" : "text-left"
-                  }`}
-                >
+                <h3 className="font-display font-semibold text-lg text-foreground mb-1 text-start">
                   {project.title}
                 </h3>
-                <p
-                  className={`text-sm text-muted-foreground mb-4 ${
-                    direction === "rtl" ? "text-right" : "text-left"
-                  }`}
-                >
+                <p className="text-sm text-muted-foreground mb-4 text-start">
                   {project.description}
                 </p>
                 {project.technologies && project.technologies.length > 0 && (

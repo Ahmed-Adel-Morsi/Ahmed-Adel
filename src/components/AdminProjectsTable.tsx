@@ -17,7 +17,7 @@ const projects = [
 ];
 
 const AdminProjectsTable = () => {
-  const { t, direction } = useLanguage();
+  const { t } = useLanguage();
 
   return (
     <motion.div
@@ -27,7 +27,7 @@ const AdminProjectsTable = () => {
       className="glass-card p-6"
     >
       <div
-        className={`flex items-center justify-between mb-6 ${direction === "rtl" ? "flex-row-reverse" : ""}`}
+        className="flex items-center justify-between mb-6"
       >
         <h3 className="font-display font-semibold text-lg">
           {t("manageProjects")}
@@ -40,19 +40,13 @@ const AdminProjectsTable = () => {
       <Table>
         <TableHeader>
           <TableRow className="border-border">
-            <TableHead
-              className={direction === "rtl" ? "text-right" : "text-left"}
-            >
+            <TableHead className="text-start">
               {t("title")}
             </TableHead>
-            <TableHead
-              className={direction === "rtl" ? "text-right" : "text-left"}
-            >
+            <TableHead className="text-start">
               {t("status")}
             </TableHead>
-            <TableHead
-              className={direction === "rtl" ? "text-right" : "text-left"}
-            >
+            <TableHead className="text-start">
               {t("actions")}
             </TableHead>
           </TableRow>
