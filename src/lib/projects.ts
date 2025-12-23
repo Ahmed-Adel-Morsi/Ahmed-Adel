@@ -10,6 +10,7 @@ export interface Project {
   description: string;
   image: string;
   demoUrl: string;
+  technologies?: string[];
 }
 
 export const getProjects = (t: (key: string) => string): Project[] => {
@@ -20,6 +21,18 @@ export const getProjects = (t: (key: string) => string): Project[] => {
       description: t("warehouseDesc"),
       image: projectWarehouse,
       demoUrl: "https://mywarehouse.vercel.app/",
+      technologies: [
+        "React",
+        "Redux Toolkit",
+        "Bootstrap CSS",
+        "Rest API",
+        "Node.js",
+        "Express.js",
+        "JWT",
+        "MongoDB",
+        "React Bootstrap",
+        "Yup",
+      ],
     },
     {
       id: "2",
@@ -27,6 +40,13 @@ export const getProjects = (t: (key: string) => string): Project[] => {
       description: t("zwajDesc"),
       image: projectZwajIslamy,
       demoUrl: "https://zwaj-islamy.vercel.app/",
+      technologies: [
+        "React",
+        "Swiper.js",
+        "Tailwind CSS",
+        "Html2canvas",
+        "ReactMediaRecorder",
+      ],
     },
     {
       id: "3",
@@ -34,6 +54,7 @@ export const getProjects = (t: (key: string) => string): Project[] => {
       description: t("stickyDesc"),
       image: projectStickyNotes,
       demoUrl: "https://ahmed-adel-morsi.github.io/Sticky-Notes/",
+      technologies: ["HTML", "CSS", "JavaScript", "LocalStorage"],
     },
     {
       id: "4",
@@ -41,6 +62,7 @@ export const getProjects = (t: (key: string) => string): Project[] => {
       description: t("timerDesc"),
       image: projectTimerAndSW,
       demoUrl: "https://ahmed-adel-morsi.github.io/Timer-and-Stopwatch/",
+      technologies: ["HTML", "CSS", "JavaScript"],
     },
     {
       id: "5",
@@ -48,6 +70,7 @@ export const getProjects = (t: (key: string) => string): Project[] => {
       description: t("landingDesc"),
       image: projectLanding,
       demoUrl: "https://ahmed-adel-morsi.github.io/Data-Science-Zep/",
-    }
+      technologies: ["HTML", "CSS"],
+    },
   ];
 };

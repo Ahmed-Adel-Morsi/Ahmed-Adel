@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getProjects } from "@/lib/projects";
@@ -53,7 +54,7 @@ const ProjectsSection = () => {
             <motion.div
               key={project.id}
               variants={itemVariants}
-              className="glass-card hover-lift group cursor-pointer"
+              className="glass-card hover-lift group"
             >
               <div className="aspect-video overflow-hidden rounded-t-xl">
                 <img
@@ -77,12 +78,35 @@ const ProjectsSection = () => {
                 >
                   {project.description}
                 </p>
+                {project.technologies && project.technologies.length > 0 && (
+                  <div className="mb-4 flex flex-wrap gap-2">
+                    {project.technologies.slice(0, 2).map((tech) => (
+                      <Badge
+                        key={tech}
+                        variant="outline"
+                        className="rounded-full px-3 py-0.5 text-xs font-medium transition-colors hover:bg-muted hover:text-foreground"
+                      >
+                        {tech}
+                      </Badge>
+                    ))}
+                    {project.technologies.length > 2 && (
+                      <Link to={`/projects/${project.id}`}>
+                        <Badge
+                          variant="outline"
+                          className="rounded-full px-3 py-0.5 text-xs font-medium transition-colors hover:bg-muted hover:text-foreground"
+                        >
+                          +{project.technologies.length - 2}
+                        </Badge>
+                      </Link>
+                    )}
+                  </div>
+                )}
                 <div className="flex flex-wrap gap-2">
                   <Button
                     asChild
-                    variant="secondary"
+                    variant="outline"
                     size="sm"
-                    className="rounded-full"
+                    className="rounded-full hover:bg-muted hover:text-foreground"
                   >
                     <Link to={`/projects/${project.id}`}>
                       {t("viewDetails")}
@@ -90,9 +114,9 @@ const ProjectsSection = () => {
                   </Button>
                   <Button
                     asChild
-                    variant="outline"
                     size="sm"
-                    className="rounded-full hover:bg-primary hover:text-primary-foreground"
+                    variant="secondary"
+                    className="rounded-full hover:bg-secondary/80"
                   >
                     <a
                       href={project.demoUrl}
