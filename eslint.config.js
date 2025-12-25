@@ -26,4 +26,11 @@ export default tseslint.config(
       "@typescript-eslint/no-unused-vars": "off",
     },
   },
+  // Disable fast-refresh export rule where we intentionally export helpers
+  {
+    files: ["src/components/ui/**/*.tsx", "src/contexts/**/*.tsx"],
+    rules: {
+      "react-refresh/only-export-components": "off",
+    },
+  }
 );

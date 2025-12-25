@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useNavigate } from "react-router-dom";
 import heroBg from "@/assets/hero-bg.jpg";
 import profilePhoto from "@/assets/profile-photo.png";
 
@@ -39,6 +40,7 @@ const stats = [
 
 const HeroSection = () => {
   const { t, direction, language } = useLanguage();
+  const navigate = useNavigate();
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -50,7 +52,7 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pb-20 sm:pb-24"
     >
       {/* Background Image */}
       <div
@@ -64,15 +66,13 @@ const HeroSection = () => {
       <div className="absolute inset-0 aurora-bg opacity-30" />
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-6 pt-24">
-        <div className="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 pt-16 sm:pt-24">
+        <div className="flex flex-col md:flex-row justify-center items-center gap-6 sm:gap-8 md:gap-16">
           {/* Profile Photo */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
-            // animate={{ opacity: 1, scale: 1 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
-            // viewport={{ once: false }}
             className="flex-shrink-0"
           >
             <div className="relative">
@@ -80,7 +80,7 @@ const HeroSection = () => {
               <img
                 src={profilePhoto}
                 alt="Profile"
-                className="relative w-48 h-48 md:w-64 md:h-64 rounded-full object-cover border-4 border-primary/30 shadow-2xl"
+                className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-64 md:h-64 rounded-full object-cover border-4 border-primary/30 shadow-2xl"
               />
             </div>
           </motion.div>
@@ -88,14 +88,12 @@ const HeroSection = () => {
           {/* Text Content */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            // animate={{ opacity: 1, y: 0 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="max-w-2xl text-start"
+            className="w-full max-w-2xl text-start px-2 sm:px-0"
           >
             <motion.p
               initial={{ opacity: 0, x: direction === "rtl" ? 30 : -30 }}
-              // animate={{ opacity: 1, x: 0 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
               className={`text-muted-foreground text-lg ${
@@ -107,20 +105,18 @@ const HeroSection = () => {
 
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
-              // animate={{ opacity: 1, y: 0 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="text-5xl md:text-7xl font-display font-bold text-foreground mb-4"
+              className="text-4xl sm:text-5xl md:text-7xl font-display font-bold text-foreground mb-4"
             >
               {t("name")}
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
-              // animate={{ opacity: 1, y: 0 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.6 }}
-              className="text-xl md:text-2xl text-primary font-semibold mb-8"
+              className="text-lg sm:text-xl md:text-2xl text-primary font-semibold mb-6 sm:mb-8"
             >
               {t("role")}
             </motion.p>
@@ -157,23 +153,30 @@ const HeroSection = () => {
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              // animate={{ opacity: 1, y: 0 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
-              className="flex gap-4"
+              className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 w-full sm:w-auto"
             >
               <Button
                 variant="outline"
-                size="lg"
+                size="sm"
+                onClick={() => navigate("/resume")}
+                className="sm:size-lg rounded-full px-6 sm:px-8 font-medium border-border hover:bg-muted/50"
+              >
+                {t("resume") || "Resume"}
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
                 onClick={() => scrollToSection("contact")}
-                className="rounded-full px-8 font-medium border-border hover:bg-muted/50"
+                className="sm:size-lg rounded-full px-6 sm:px-8 font-medium border-border hover:bg-muted/50"
               >
                 {t("contactMe")}
               </Button>
               <Button
-                size="lg"
+                size="sm"
                 onClick={() => scrollToSection("projects")}
-                className="glow-button rounded-full px-8 font-medium"
+                className="sm:size-lg glow-button rounded-full px-6 sm:px-8 font-medium"
               >
                 {t("viewWork")}
               </Button>
@@ -184,12 +187,12 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.6 }}
-              className="mt-6 flex flex-wrap gap-4 text-sm"
+              className="mt-6 flex flex-wrap gap-2 sm:gap-4 text-xs sm:text-sm"
             >
               {stats.map((stat) => (
                 <div
                   key={stat.en}
-                  className="glass-card hover:shadow-none relative overflow-hidden rounded-2xl border border-border/60 bg-background/40 px-4 py-3 text-xs text-muted-foreground/90 shadow-sm backdrop-blur"
+                  className="glass-card hover:shadow-none relative overflow-hidden rounded-lg sm:rounded-2xl border border-border/60 bg-background/40 px-3 sm:px-4 py-2 sm:py-3 text-xs text-muted-foreground/90 shadow-sm backdrop-blur flex-1 sm:flex-none min-w-[100px]"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-primary/0 opacity-70" />
                   <div className="relative z-10 flex flex-col">
@@ -210,13 +213,11 @@ const HeroSection = () => {
       {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
-        // animate={{ opacity: 1 }}
         whileInView={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.6 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
         <motion.div
-          // animate={{ y: [0, 10, 0] }}
           whileInView={{ y: [0, 10, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
           className="w-6 h-10 rounded-full border-2 border-muted-foreground/50 flex justify-center pt-2"

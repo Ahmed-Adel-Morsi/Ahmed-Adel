@@ -1,37 +1,38 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Toaster } from "@/components/ui/sonner";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import Index from "./pages/Index";
-import AdminDashboard from "./pages/AdminDashboard";
+import Resume from "./pages/Resume";
 import NotFound from "./pages/NotFound";
 import ProjectDetails from "./pages/ProjectDetails";
 
-const queryClient = new QueryClient();
+const App = () => {
+  const base = import.meta.env.BASE_URL;
+  const basename = base === "/" ? undefined : base.replace(/\/$/, "");
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
+  const router = createBrowserRouter(
+    [
+      { path: "/", element: <Index /> },
+      { path: "/resume", element: <Resume /> },
+      { path: "/projects/:id", element: <ProjectDetails /> },
+      { path: "*", element: <NotFound /> },
+    ],
+    {
+      basename,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      future: { v7_startTransition: true } as any,
+    }
+  );
+
+  return (
     <ThemeProvider>
       <LanguageProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/projects/:id" element={<ProjectDetails />} />
-              <Route path="/admin" element={<AdminDashboard />} />
-              <Route path="/admin/*" element={<AdminDashboard />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
+        <Toaster />
+        <RouterProvider router={router} />
       </LanguageProvider>
     </ThemeProvider>
-  </QueryClientProvider>
-);
+  );
+};
 
 export default App;

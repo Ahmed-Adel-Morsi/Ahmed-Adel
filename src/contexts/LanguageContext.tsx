@@ -31,6 +31,7 @@ const translations: Translations = {
   role: { en: "Frontend Web Developer", ar: "مطور واجهات ويب" },
   viewWork: { en: "View My Work", ar: "عرض أعمالي" },
   contactMe: { en: "Contact Me", ar: "تواصل معي" },
+  resume: { en: "Resume", ar: "السيرة الذاتية" },
 
   // Projects
   myProjects: { en: "My Projects", ar: "مشاريعي" },
@@ -73,28 +74,9 @@ const translations: Translations = {
   message: { en: "Message", ar: "الرسالة" },
   sendMessage: { en: "Send Message", ar: "إرسال الرسالة" },
 
-  // Admin
-  adminDashboard: { en: "Admin Dashboard", ar: "لوحة التحكم" },
-  dashboard: { en: "Dashboard", ar: "الرئيسية" },
-  messages: { en: "Messages", ar: "الرسائل" },
-  analytics: { en: "Analytics", ar: "التحليلات" },
-  settings: { en: "Settings", ar: "الإعدادات" },
-  totalProjects: { en: "Total Projects", ar: "إجمالي المشاريع" },
-  newMessages: { en: "New Messages", ar: "رسائل جديدة" },
-  totalViews: { en: "Total Views", ar: "إجمالي المشاهدات" },
-  activeUsers: { en: "Active Users", ar: "المستخدمون النشطون" },
-  manageProjects: { en: "Manage Projects", ar: "إدارة المشاريع" },
-  title: { en: "Title", ar: "العنوان" },
-  status: { en: "Status", ar: "الحالة" },
-  actions: { en: "Actions", ar: "الإجراءات" },
-  published: { en: "Published", ar: "منشور" },
-  draft: { en: "Draft", ar: "مسودة" },
-  edit: { en: "Edit", ar: "تعديل" },
-  delete: { en: "Delete", ar: "حذف" },
-  trafficOverview: { en: "Traffic Overview", ar: "نظرة على الزيارات" },
-  userAnalytics: { en: "User Analytics", ar: "تحليلات المستخدمين" },
-  returning: { en: "Returning", ar: "عائدون" },
-  new: { en: "New", ar: "جدد" },
+  // Resume
+  download: { en: "Download Resume", ar: "تحميل السيرة الذاتية" },
+  back: { en: "Back", ar: "عودة" },
 
   // Footer
   copyright: {

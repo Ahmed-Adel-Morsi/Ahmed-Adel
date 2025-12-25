@@ -3,12 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 import { useState } from "react";
 
 const ContactSection = () => {
   const { t, direction } = useLanguage();
-  const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -35,8 +34,7 @@ const ContactSection = () => {
 
     window.location.href = mailtoLink;
 
-    toast({
-      title: direction === "rtl" ? "تم الإرسال!" : "Message sent!",
+    toast(direction === "rtl" ? "تم الإرسال!" : "Message sent!", {
       description:
         direction === "rtl"
           ? "شكراً لتواصلك معي. سأرد عليك قريباً."
@@ -52,7 +50,6 @@ const ContactSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          // viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="glass-card p-8 md:p-12"
         >
@@ -63,38 +60,52 @@ const ContactSection = () => {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-medium text-muted-foreground mb-2 text-start">
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-muted-foreground mb-2 text-start"
+                >
                   {t("yourName")}
                 </label>
                 <Input
                   type="text"
+                  id="name"
                   required
                   className="rounded-lg bg-secondary/50 border-border focus:border-primary"
                   value={name}
+                  autoComplete="name"
                   onChange={(e) => setName(e.target.value)}
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-muted-foreground mb-2 text-start">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-muted-foreground mb-2 text-start"
+                >
                   {t("yourEmail")}
                 </label>
                 <Input
                   type="email"
+                  id="email"
                   required
                   className="rounded-lg bg-secondary/50 border-border focus:border-primary"
                   dir="ltr"
                   value={email}
+                  autoComplete="email"
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-muted-foreground mb-2 text-start">
+              <label
+                htmlFor="message"
+                className="block text-sm font-medium text-muted-foreground mb-2 text-start"
+              >
                 {t("message")}
               </label>
               <Textarea
                 rows={5}
+                id="message"
                 required
                 className="rounded-lg bg-secondary/50 border-border focus:border-primary resize-none"
                 value={message}

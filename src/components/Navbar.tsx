@@ -116,6 +116,7 @@ const Navbar = () => {
         size="icon"
         onClick={toggleTheme}
         className="rounded-full w-9 h-9 hover:bg-muted/50"
+        aria-label="Toggle Theme"
       >
         <motion.div
           initial={false}
@@ -136,6 +137,7 @@ const Navbar = () => {
         size="icon"
         onClick={toggleLanguage}
         className="rounded-full w-9 h-9 hover:bg-muted/50 text-xs font-bold"
+        aria-label="Toggle Language"
       >
         {language === "en" ? "us" : "ar"}
       </Button>
@@ -160,11 +162,6 @@ const Navbar = () => {
               {t(item.key)}
             </DropdownMenuItem>
           ))}
-          {/* <DropdownMenuItem asChild>
-            <Link to="/admin" className="cursor-pointer">
-              {t("adminDashboard")}
-            </Link>
-          </DropdownMenuItem> */}
         </DropdownMenuContent>
       </DropdownMenu>
     </motion.nav>
