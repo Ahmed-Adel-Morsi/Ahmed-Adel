@@ -26,7 +26,7 @@ const SkillsSection = () => {
   };
 
   return (
-    <section id="skills" className="py-24 px-6 relative">
+    <section id="skills" className="py-24 md:px-6 relative">
       <div className="absolute inset-0 aurora-bg opacity-20" />
 
       <div className="container mx-auto max-w-5xl relative z-10">
@@ -63,7 +63,7 @@ const SkillsSection = () => {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            className="grid gap-8 md:gap-10 md:grid-cols-2"
+            className="grid gap-8 min-[900px]:gap-10 min-[900px]:grid-cols-2"
           >
             {skillCategories.map((category) => {
               const visibleSkills = (category.skills || []).filter(
@@ -73,7 +73,7 @@ const SkillsSection = () => {
                 <motion.div
                   key={category.title}
                   variants={itemVariants}
-                  className="glass-card relative overflow-hidden p-6 md:p-7"
+                  className="glass-card relative overflow-hidden p-6 min-[900px]:p-7"
                 >
                   <div
                     className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${category.accent} opacity-70`}

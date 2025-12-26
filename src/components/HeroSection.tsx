@@ -66,7 +66,7 @@ const HeroSection = () => {
       <div className="absolute inset-0 aurora-bg opacity-30" />
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 pt-16 sm:pt-24">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 pt-24">
         <div className="flex flex-col md:flex-row justify-center items-center gap-6 sm:gap-8 md:gap-16">
           {/* Profile Photo */}
           <motion.div
