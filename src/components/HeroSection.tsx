@@ -2,8 +2,8 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useNavigate } from "react-router-dom";
-import heroBg from "@/assets/hero-bg.jpg";
-import profilePhoto from "@/assets/profile-photo.png";
+import heroBg from "@/assets/hero-bg.webp";
+import profilePhoto from "@/assets/profile-photo.webp";
 
 const valuePoints = [
   {

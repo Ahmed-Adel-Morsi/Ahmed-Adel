@@ -11,7 +11,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import profilePhoto from "@/assets/profile-photo.png";
+import profilePhoto from "@/assets/profile-photo.webp";
 
 const Navbar = () => {
   const { theme, toggleTheme } = useTheme();

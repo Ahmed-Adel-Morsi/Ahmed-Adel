@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useEffect, useState } from "react";
 import Footer from "@/components/Footer";
-import certificateImage from "@/assets/Certificate.jpg";
+import certificateImage from "@/assets/Certificate.webp";
 
 const Resume = () => {
   const navigate = useNavigate();
