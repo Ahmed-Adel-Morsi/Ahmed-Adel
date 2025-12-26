@@ -9,6 +9,12 @@ export default {
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
   ],
+  safelist: [
+    {
+      pattern:
+        /^(from|to)-(sky|emerald|violet|amber|blue|purple)-(400|600)\/(5|20)$/,
+    },
+  ],
   prefix: "",
   theme: {
     container: {
