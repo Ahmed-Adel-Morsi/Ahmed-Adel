@@ -26,7 +26,7 @@ const SkillsSection = () => {
   };
 
   return (
-    <section id="skills" className="py-24 md:px-6 relative">
+    <section id="skills" className="py-12 sm:py-16 md:py-24 md:px-6 relative">
       <div className="absolute inset-0 aurora-bg opacity-20" />
 
       <div className="container mx-auto max-w-5xl relative z-10">

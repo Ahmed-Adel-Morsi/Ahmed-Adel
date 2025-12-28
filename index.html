@@ -13,34 +13,76 @@
       name="keywords"
       content="frontend developer, web developer, Angular, React, TypeScript, portfolio, Ahmed Adel"
     />
-    <link rel="canonical" href="https://ahmedadel.dev" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#8b5cf6" />
+    <link rel="canonical" href="https://ahmedadel.tech" />
 
+    <!-- Open Graph / Facebook -->
     <meta property="og:title" content="Ahmed Adel | Frontend Web Developer" />
     <meta
       property="og:description"
       content="Frontend Web Developer specializing in Angular, React, TypeScript and modern web technologies."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="" />
-    <meta property="og:url" content="https://ahmedadel.dev" />
+    <meta property="og:image" content="https://ahmedadel.tech/og-image.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="https://ahmedadel.tech" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="ar_SA" />
 
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Ahmed Adel | Frontend Web Developer" />
     <meta
       name="twitter:description"
       content="Frontend Web Developer specializing in Angular, React, TypeScript and modern web technologies."
     />
-    <meta name="twitter:image" content="" />
+    <meta
+      name="twitter:image"
+      content="https://ahmedadel.tech/twitter-image.jpg"
+    />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <link rel="icon" type="image/ico" href="/src/assets/icon.ico" />
   </head>
 
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Ahmed Adel",
+        "jobTitle": "Frontend Web Developer",
+        "url": "https://ahmedadel.tech",
+        "sameAs": [
+          "https://github.com/Ahmed-Adel-Morsi",
+          "https://www.linkedin.com/in/ahmed-adel-morsi"
+        ],
+        "email": "ahmedadel0239@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Cairo",
+          "addressCountry": "Egypt"
+        },
+        "knowsAbout": [
+          "Frontend Development",
+          "React",
+          "Angular",
+          "TypeScript",
+          "JavaScript",
+          "Web Development"
+        ]
+      }
+    </script>
   </body>
 </html>

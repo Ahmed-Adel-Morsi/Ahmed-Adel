@@ -35,15 +35,15 @@ const Resume = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <main className="container mx-auto px-4 py-16 max-w-4xl">
+      <main className="container mx-auto py-10 sm:py-16 md:py-24 max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
           {/* Header */}
-          <div className="mb-8 flex items-center justify-between">
-            <div>
+          <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+            <div className="flex-1">
               <button
                 onClick={() => navigate("/")}
                 className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-4"
@@ -51,14 +51,17 @@ const Resume = () => {
                 <ArrowLeft className="h-4 w-4" />
                 {t("back") || "Back"}
               </button>
-              <h1 className="font-display text-4xl font-bold mb-2">
+              <h1 className="font-display text-3xl sm:text-4xl font-bold mb-2">
                 Ahmed Adel
               </h1>
-              <p className="text-lg text-muted-foreground">
+              <p className="text-base sm:text-lg text-muted-foreground">
                 Front-End Web Developer | React | Angular
               </p>
             </div>
-            <Button onClick={handleDownloadPDF} className="gap-2 rounded-full">
+            <Button
+              onClick={handleDownloadPDF}
+              className="gap-2 rounded-full w-full sm:w-auto"
+            >
               <Download className="h-4 w-4" />
               {t("download") || "Download PDF"}
             </Button>
@@ -69,7 +72,7 @@ const Resume = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.1, duration: 0.5 }}
-            className="glass-card p-6 mb-8"
+            className="glass-card p-5 md:p-6 mb-6 md:mb-8"
           >
             <h2 className="font-display text-xl font-semibold mb-4">
               {language === "ar" ? "معلومات التواصل" : "Contact Information"}
@@ -120,7 +123,7 @@ const Resume = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
-            className="glass-card p-6 mb-8"
+            className="glass-card p-5 md:p-6 mb-6 md:mb-8"
           >
             <h2 className="font-display text-xl font-semibold mb-4">
               {language === "ar" ? "ملخص مهني" : "Professional Summary"}
@@ -143,7 +146,7 @@ const Resume = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.5 }}
-            className="glass-card p-6 mb-8"
+            className="glass-card p-5 md:p-6 mb-6 md:mb-8"
           >
             <h2 className="font-display text-xl font-semibold mb-6">
               {language === "ar" ? "المهارات" : "Skills"}
@@ -229,7 +232,7 @@ const Resume = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.5 }}
-            className="glass-card p-6 mb-8"
+            className="glass-card p-5 md:p-6 mb-6 md:mb-8"
           >
             <h2 className="font-display text-xl font-semibold mb-6">
               {language === "ar" ? "الخبرة العملية" : "Professional Experience"}
@@ -302,7 +305,7 @@ const Resume = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.45, duration: 0.5 }}
-            className="glass-card p-6 mb-8"
+            className="glass-card p-5 md:p-6 mb-6 md:mb-8"
           >
             <h2 className="font-display text-xl font-semibold mb-6">
               {language === "ar" ? "خبرة إضافية" : "Additional Experience"}
@@ -361,7 +364,7 @@ const Resume = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.5 }}
-            className="glass-card p-6 mb-8"
+            className="glass-card p-5 md:p-6 mb-6 md:mb-8"
           >
             <h2 className="font-display text-xl font-semibold mb-6">
               {language === "ar" ? "التعليم" : "Education"}
@@ -389,7 +392,7 @@ const Resume = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.53, duration: 0.5 }}
-            className="glass-card p-6 mb-8"
+            className="glass-card p-5 md:p-6 mb-6 md:mb-8"
           >
             <h2 className="font-display text-xl font-semibold mb-6">
               {language === "ar"
@@ -448,7 +451,7 @@ const Resume = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.55, duration: 0.5 }}
-            className="glass-card p-6 mb-8"
+            className="glass-card p-5 md:p-6 mb-6 md:mb-8"
           >
             <h2 className="font-display text-xl font-semibold mb-6">
               {language === "ar" ? "اللغات" : "Languages"}
@@ -472,7 +475,7 @@ const Resume = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.5 }}
-            className="glass-card p-6"
+            className="glass-card p-5 md:p-6"
           >
             <h2 className="font-display text-xl font-semibold mb-6">
               {language === "ar" ? "مشاريع مختارة" : "Key Projects"}

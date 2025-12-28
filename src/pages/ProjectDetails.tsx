@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -8,6 +8,7 @@ import { useSkills } from "@/hooks/useSkills";
 import type { Project } from "@/lib/projects";
 import type { Skill } from "@/lib/skills";
 import { Button } from "@/components/ui/button";
+import { ArrowLeft, ExternalLink } from "lucide-react";
 
 const ProjectDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -20,6 +21,7 @@ const ProjectDetails = () => {
   const [error, setError] = useState<string | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const { skillCategories } = useSkills();
+  const thumbnailContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fetchProject = async () => {
@@ -64,6 +66,22 @@ const ProjectDetails = () => {
     setActiveIndex((prev) => (prev + 1) % images.length);
   };
 
+  // Scroll to active thumbnail
+  useEffect(() => {
+    if (thumbnailContainerRef.current) {
+      const activeButton = thumbnailContainerRef.current.children[
+        activeIndex
+      ] as HTMLElement;
+      if (activeButton) {
+        activeButton.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "center",
+        });
+      }
+    }
+  }, [activeIndex, images.length]);
+
   if (loading) {
     return (
       <div className="min-h-screen bg-background flex flex-col">
@@ -100,121 +118,129 @@ const ProjectDetails = () => {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <main className="flex-1 pt-24 px-6">
+      <main className="flex-1 pt-10 sm:pt-16 md:pt-24 md:px-6">
         <div className="container mx-auto max-w-6xl space-y-10 mb-10">
-          <div className="flex items-center justify-between gap-4">
-            <div className="space-y-2">
-              <p className="text-sm uppercase tracking-wide text-muted-foreground">
-                {t("viewDetails")}
-              </p>
-              <h1 className="text-3xl md:text-4xl font-display font-bold text-foreground">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+            <div className="flex-1">
+              <button
+                onClick={() => {
+                  navigate("/");
+                  setTimeout(() => {
+                    const projectsSection = document.getElementById("projects");
+                    if (projectsSection) {
+                      projectsSection.scrollIntoView({ behavior: "smooth" });
+                    }
+                  }, 100);
+                }}
+                className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-4"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                {t("backToProjects") || "Back to Projects"}
+              </button>
+              <h1 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-2">
                 {language === "ar" && project.titleAr
                   ? project.titleAr
                   : project.title}
               </h1>
+              <p className="text-sm uppercase tracking-wide text-muted-foreground">
+                {t("viewDetails")}
+              </p>
             </div>
             <Button
-              variant="outline"
-              className="rounded-full"
-              onClick={() => {
-                navigate("/");
-                setTimeout(() => {
-                  const projectsSection = document.getElementById("projects");
-                  if (projectsSection) {
-                    projectsSection.scrollIntoView({ behavior: "smooth" });
-                  }
-                }, 100);
-              }}
+              asChild
+              className="rounded-full w-full sm:w-auto gap-2"
+              variant="default"
             >
-              {t("backToProjects")}
+              <a
+                href={project.demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <ExternalLink
+                  className={`h-4 w-4 ${language === "ar" ? "-scale-x-100" : ""}`}
+                />
+                {t("liveDemo")}
+              </a>
             </Button>
           </div>
 
-          <div className="grid gap-8 lg:grid-cols-[1.1fr,0.9fr] items-start">
-            <div className="space-y-4">
-              <div className="rounded-2xl bg-muted/40 p-4 shadow-lg">
-                <div className="relative overflow-hidden rounded-xl bg-muted aspect-video">
-                  <img
-                    src={images[activeIndex]}
-                    alt={project.title}
-                    className="h-full w-full object-cover"
-                  />
+          <div className="space-y-4">
+            <div className="rounded-2xl bg-muted/40 p-4 shadow-lg">
+              <div className="relative overflow-hidden rounded-xl bg-muted aspect-video">
+                <img
+                  src={images[activeIndex]}
+                  alt={project.title}
+                  className="h-full w-full object-cover"
+                />
 
-                  {showNavigation && (
-                    <>
-                      <div className="absolute inset-y-0 left-2 flex items-center">
-                        <Button
-                          size="icon"
-                          variant="secondary"
-                          className="rounded-full shadow-md"
-                          onClick={handlePrev}
-                        >
-                          {isRtl ? "›" : "‹"}
-                        </Button>
-                      </div>
-                      <div className="absolute inset-y-0 right-2 flex items-center">
-                        <Button
-                          size="icon"
-                          variant="secondary"
-                          className="rounded-full shadow-md"
-                          onClick={handleNext}
-                        >
-                          {isRtl ? "‹" : "›"}
-                        </Button>
-                      </div>
-                    </>
-                  )}
-                </div>
+                {showNavigation && (
+                  <>
+                    <div className="absolute inset-y-0 left-2 flex items-center">
+                      <Button
+                        size="icon"
+                        variant="secondary"
+                        className="rounded-full shadow-md"
+                        onClick={handlePrev}
+                      >
+                        {isRtl ? "›" : "‹"}
+                      </Button>
+                    </div>
+                    <div className="absolute inset-y-0 right-2 flex items-center">
+                      <Button
+                        size="icon"
+                        variant="secondary"
+                        className="rounded-full shadow-md"
+                        onClick={handleNext}
+                      >
+                        {isRtl ? "‹" : "›"}
+                      </Button>
+                    </div>
+                  </>
+                )}
               </div>
-
-              {images.length > 1 && (
-                <div className="flex gap-2 overflow-x-auto py-2 justify-center">
-                  {images.map((img, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => setActiveIndex(idx)}
-                      className={`relative flex-shrink-0 rounded-md overflow-hidden transition-all ${
-                        idx === activeIndex
-                          ? "ring-2 ring-primary ring-offset-2 ring-offset-background"
-                          : "opacity-60 hover:opacity-100 border"
-                      }`}
-                      aria-label={`Go to image ${idx + 1}`}
-                    >
-                      <img
-                        src={img}
-                        alt={`Thumbnail ${idx + 1}`}
-                        className="h-12 w-16 object-cover"
-                      />
-                    </button>
-                  ))}
-                </div>
-              )}
             </div>
 
-            <div className="space-y-6">
-              <section className="rounded-2xl border bg-card p-6 shadow-sm">
-                <h2 className="text-xl font-semibold text-foreground mb-3">
-                  {language === "ar" ? "نظرة عامة" : "Overview"}
-                </h2>
-                <p className="text-muted-foreground leading-relaxed">
-                  {language === "ar" && project.descriptionAr
-                    ? project.descriptionAr
-                    : project.description}
-                </p>
-                <div className="mt-5 flex flex-wrap gap-3">
-                  <Button asChild className="rounded-full" variant="default">
-                    <a
-                      href={project.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {t("liveDemo")}
-                    </a>
-                  </Button>
-                </div>
-              </section>
-            </div>
+            {images.length > 1 && (
+              <div
+                className="flex gap-2 w-fit mx-auto overflow-x-auto px-4 py-2 justify-start scrollbar-transparent"
+                ref={thumbnailContainerRef}
+                style={{
+                  scrollbarWidth: "thin",
+                  scrollbarColor: "rgba(255,255,255,0.1) transparent",
+                }}
+              >
+                {images.map((img, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveIndex(idx)}
+                    className={`relative flex-shrink-0 rounded-md overflow-hidden transition-all border-2 ${
+                      idx === activeIndex
+                        ? "border-primary"
+                        : "opacity-60 hover:opacity-100"
+                    }`}
+                    aria-label={`Go to image ${idx + 1}`}
+                  >
+                    <img
+                      src={img}
+                      alt={`Thumbnail ${idx + 1}`}
+                      className="h-12 w-16 object-cover"
+                    />
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
+
+          <section className="rounded-2xl border bg-card p-6 shadow-sm">
+            <h2 className="text-xl font-semibold text-foreground mb-3">
+              {language === "ar" ? "نظرة عامة" : "Overview"}
+            </h2>
+            <p className="text-muted-foreground leading-relaxed">
+              {language === "ar" && project.descriptionAr
+                ? project.descriptionAr
+                : project.description}
+            </p>
+          </section>
 
           {(project.detailedDescriptionAr || project.detailedDescription) && (
             <section className="rounded-2xl border bg-card p-8 shadow-sm">

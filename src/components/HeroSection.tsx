@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useNavigate } from "react-router-dom";
-import heroBg from "@/assets/hero-bg.webp";
 import profilePhoto from "@/assets/profile-photo.webp";
 
 const valuePoints = [
@@ -32,7 +31,7 @@ const stats = [
     ar: "سنوات من التعلم والبناء",
   },
   {
-    value: "+8",
+    value: "+12",
     en: "Core technologies",
     ar: "تقنيات أساسية",
   },
@@ -54,16 +53,21 @@ const HeroSection = () => {
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden pb-20 sm:pb-24"
     >
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroBg})` }}
-      >
-        <div className="absolute inset-0 bg-background/60" />
+      {/* Modern Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5" />
+
+      {/* Animated Gradient Orbs */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/4 -left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 -right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/10 rounded-full blur-3xl animate-pulse delay-500" />
       </div>
 
+      {/* Subtle Grid Pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
+
       {/* Aurora Effect */}
-      <div className="absolute inset-0 aurora-bg opacity-30" />
+      <div className="absolute inset-0 aurora-bg opacity-20" />
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 sm:px-6 pt-24">
