@@ -56,7 +56,11 @@ const Resume = () => {
           transition={{ duration: 0.5 }}
         >
           {/* Header */}
-          <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+          <div
+            className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6"
+            dir={language === "ar" ? "rtl" : "ltr"}
+            lang={language === "ar" ? "ar" : "en"}
+          >
             <div className="flex-1">
               <button
                 onClick={() => navigate("/")}
@@ -74,7 +78,7 @@ const Resume = () => {
             </div>
             <Button
               onClick={handleDownloadPDF}
-              className={`gap-2 rounded-full w-full sm:w-auto ${language === "ar" ? "flex-row-reverse" : ""}`}
+              className="gap-2 rounded-full w-full sm:w-auto"
             >
               <Download className="h-4 w-4" />
               {t("download") || "Download PDF"}
