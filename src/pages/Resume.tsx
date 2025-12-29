@@ -12,6 +12,20 @@ const Resume = () => {
   const { t, language } = useLanguage();
   const [showCertificateModal, setShowCertificateModal] = useState(false);
 
+  // Force LTR and English on Resume page, restore on unmount
+  useEffect(() => {
+    const previousDir = document.documentElement.dir;
+    const previousLang = document.documentElement.lang;
+
+    document.documentElement.dir = "ltr";
+    document.documentElement.lang = "en";
+
+    return () => {
+      document.documentElement.dir = previousDir;
+      document.documentElement.lang = previousLang;
+    };
+  }, []);
+
   useEffect(() => {
     if (showCertificateModal) {
       document.documentElement.style.overflow = "hidden";
@@ -34,7 +48,7 @@ const Resume = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background" dir="ltr">
       <main className="container mx-auto py-10 sm:py-16 md:py-24 max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -60,7 +74,7 @@ const Resume = () => {
             </div>
             <Button
               onClick={handleDownloadPDF}
-              className="gap-2 rounded-full w-full sm:w-auto"
+              className={`gap-2 rounded-full w-full sm:w-auto ${language === "ar" ? "flex-row-reverse" : ""}`}
             >
               <Download className="h-4 w-4" />
               {t("download") || "Download PDF"}
@@ -75,7 +89,7 @@ const Resume = () => {
             className="glass-card p-5 md:p-6 mb-6 md:mb-8"
           >
             <h2 className="font-display text-xl font-semibold mb-4">
-              {language === "ar" ? "معلومات التواصل" : "Contact Information"}
+              Contact Information
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
               <p>
@@ -126,7 +140,7 @@ const Resume = () => {
             className="glass-card p-5 md:p-6 mb-6 md:mb-8"
           >
             <h2 className="font-display text-xl font-semibold mb-4">
-              {language === "ar" ? "ملخص مهني" : "Professional Summary"}
+              Professional Summary
             </h2>
             <p className="text-muted-foreground leading-relaxed">
               Recent Computer Science graduate specializing in front-end web
@@ -148,9 +162,7 @@ const Resume = () => {
             transition={{ delay: 0.3, duration: 0.5 }}
             className="glass-card p-5 md:p-6 mb-6 md:mb-8"
           >
-            <h2 className="font-display text-xl font-semibold mb-6">
-              {language === "ar" ? "المهارات" : "Skills"}
-            </h2>
+            <h2 className="font-display text-xl font-semibold mb-6">Skills</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <h3 className="font-semibold mb-3">Frontend</h3>
@@ -235,7 +247,7 @@ const Resume = () => {
             className="glass-card p-5 md:p-6 mb-6 md:mb-8"
           >
             <h2 className="font-display text-xl font-semibold mb-6">
-              {language === "ar" ? "الخبرة العملية" : "Professional Experience"}
+              Professional Experience
             </h2>
             <div className="space-y-6">
               <div>
@@ -308,7 +320,7 @@ const Resume = () => {
             className="glass-card p-5 md:p-6 mb-6 md:mb-8"
           >
             <h2 className="font-display text-xl font-semibold mb-6">
-              {language === "ar" ? "خبرة إضافية" : "Additional Experience"}
+              Additional Experience
             </h2>
             <div className="space-y-6">
               <div>
@@ -367,7 +379,7 @@ const Resume = () => {
             className="glass-card p-5 md:p-6 mb-6 md:mb-8"
           >
             <h2 className="font-display text-xl font-semibold mb-6">
-              {language === "ar" ? "التعليم" : "Education"}
+              Education
             </h2>
             <div className="space-y-6">
               <div>
@@ -395,9 +407,7 @@ const Resume = () => {
             className="glass-card p-5 md:p-6 mb-6 md:mb-8"
           >
             <h2 className="font-display text-xl font-semibold mb-6">
-              {language === "ar"
-                ? "الشهادات والدورات"
-                : "Certifications & Courses"}
+              Certifications & Courses
             </h2>
             <div className="space-y-6">
               <div>
@@ -454,7 +464,7 @@ const Resume = () => {
             className="glass-card p-5 md:p-6 mb-6 md:mb-8"
           >
             <h2 className="font-display text-xl font-semibold mb-6">
-              {language === "ar" ? "اللغات" : "Languages"}
+              Languages
             </h2>
             <div className="space-y-3">
               <div className="flex items-center justify-between">
@@ -478,40 +488,53 @@ const Resume = () => {
             className="glass-card p-5 md:p-6"
           >
             <h2 className="font-display text-xl font-semibold mb-6">
-              {language === "ar" ? "مشاريع مختارة" : "Key Projects"}
+              Key Projects
             </h2>
             <div className="space-y-4">
               <div>
                 <h3 className="font-semibold text-base mb-1">
-                  E-Commerce Platform
+                  Warehouse Management System
                 </h3>
                 <p className="text-sm text-muted-foreground mb-2">
-                  Full-stack online shopping application with product catalog,
-                  shopping cart, and checkout functionality
+                  A full-stack web application for managing warehouse inventory,
+                  products, customers, vendors, and transactions with real-time
+                  reporting.
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {["React", "TypeScript", "Firebase", "Tailwind CSS"].map(
-                    (tech) => (
-                      <span
-                        key={tech}
-                        className="text-xs px-2 py-1 rounded-full bg-primary/10 text-primary"
-                      >
-                        {tech}
-                      </span>
-                    )
-                  )}
+                  {[
+                    "React",
+                    "Redux Toolkit",
+                    "Bootstrap CSS",
+                    "Node.js",
+                    "MongoDB",
+                    "Express",
+                  ].map((tech) => (
+                    <span
+                      key={tech}
+                      className="text-xs px-2 py-1 rounded-full bg-primary/10 text-primary"
+                    >
+                      {tech}
+                    </span>
+                  ))}
                 </div>
               </div>
               <div>
                 <h3 className="font-semibold text-base mb-1">
-                  Task Management System
+                  Islamic Marriage Initiative
                 </h3>
                 <p className="text-sm text-muted-foreground mb-2">
-                  Productivity application with drag-and-drop interface,
-                  real-time updates, and user authentication
+                  A comprehensive Islamic marriage platform connecting eligible
+                  men and women based on Islamic values, featuring form
+                  submission, profile browsing, voice recording, and educational
+                  courses.
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {["Angular", "Node.js", "MongoDB", "Express"].map((tech) => (
+                  {[
+                    "React",
+                    "Swiper.js",
+                    "Tailwind CSS",
+                    "React Media Recorder",
+                  ].map((tech) => (
                     <span
                       key={tech}
                       className="text-xs px-2 py-1 rounded-full bg-primary/10 text-primary"
