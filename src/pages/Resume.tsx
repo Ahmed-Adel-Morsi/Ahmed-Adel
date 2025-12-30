@@ -9,7 +9,7 @@ import certificateImage from "@/assets/Certificate.webp";
 
 const Resume = () => {
   const navigate = useNavigate();
-  const { t, language } = useLanguage();
+  const { t, language, direction } = useLanguage();
   const [showCertificateModal, setShowCertificateModal] = useState(false);
 
   // Force LTR and English on Resume page, restore on unmount
@@ -58,8 +58,8 @@ const Resume = () => {
           {/* Header */}
           <div
             className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6"
-            dir={language === "ar" ? "rtl" : "ltr"}
-            lang={language === "ar" ? "ar" : "en"}
+            dir={direction}
+            lang={language}
           >
             <div className="flex-1">
               <button
