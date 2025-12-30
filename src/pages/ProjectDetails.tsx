@@ -202,7 +202,7 @@ const ProjectDetails = () => {
 
             {images.length > 1 && (
               <div
-                className="flex gap-2 w-fit mx-auto overflow-x-auto px-4 py-2 justify-start scrollbar-transparent"
+                className="flex gap-2 w-fit max-w-full mx-auto overflow-x-auto px-4 py-2 justify-start scrollbar-transparent"
                 ref={thumbnailContainerRef}
                 style={{
                   scrollbarWidth: "thin",
