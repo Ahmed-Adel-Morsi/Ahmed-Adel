@@ -130,7 +130,7 @@ const Resume = () => {
                   rel="noopener noreferrer"
                   className="text-primary hover:underline"
                 >
-                  github.com/Ahmed-Adel-Morsi
+                  github.com/ahmed-adel-morsi
                 </a>
               </p>
             </div>
