@@ -171,7 +171,6 @@ const HeroSection = () => {
                 asChild
                 variant="outline"
                 size="sm"
-                onClick={() => {}}
                 className="sm:size-lg rounded-full px-6 sm:px-8 font-medium border-border hover:bg-muted/50"
               >
                 <a
