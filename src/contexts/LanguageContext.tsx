@@ -37,33 +37,8 @@ const translations: Translations = {
   myProjects: { en: "My Projects", ar: "مشاريعي" },
   viewDetails: { en: "View Details", ar: "عرض التفاصيل" },
   liveDemo: { en: "Live Demo", ar: "عرض مباشر" },
-  backToProjects: { en: "Back to Projects", ar: "العودة للمشاريع" },
-  projectNotFound: { en: "Project not found", ar: "المشروع غير موجود" },
-  warehouse: { en: "Warehouse Management System", ar: "نظام إدارة مخارن" },
-  warehouseDesc: {
-    en: "Warehouse Management System (ERP)",
-    ar: "نظام إدارة مخارن",
-  },
-  zwaj: { en: "Zwaj Islamy App", ar: "موقع زواج إسلامي" },
-  zwajDesc: {
-    en: "Online Zwaj Islamy platform",
-    ar: "تفاصيل منصة الزواج الإسلامي",
-  },
-  sticky: { en: "Sticky Notes App", ar: "موقع لحفظ ملاحظاتك" },
-  stickyDesc: {
-    en: "Productivity Sticky Notes Tool",
-    ar: "أداة حفظ ملاحظات لزيادة الإنتاجية",
-  },
-  timer: { en: "Countdown Timer & Stopwatch", ar: "عداد تنازلي وساعة إيقاف" },
-  timerDesc: {
-    en: "Timer and Stopwatch Tool",
-    ar: "أداة عداد تنازلي وساعة إيقاف",
-  },
-  landing: { en: "Landing Page", ar: "صفحة هبوط" },
-  landingDesc: {
-    en: "Modern Landing Page",
-    ar: "صفحة هبوط حديثة",
-  },
+  technologies: { en: "Technologies Used", ar: "التقنيات المستخدمة" },
+
   // Skills
   skillsTitle: { en: "Skills & Technologies", ar: "المهارات والتقنيات" },
 
@@ -73,10 +48,6 @@ const translations: Translations = {
   yourEmail: { en: "Your Email", ar: "البريد الإلكتروني" },
   message: { en: "Message", ar: "الرسالة" },
   sendMessage: { en: "Send Message", ar: "إرسال الرسالة" },
-
-  // Resume
-  download: { en: "Download Resume", ar: "تحميل السيرة الذاتية" },
-  back: { en: "Back", ar: "عودة" },
 
   // Footer
   copyright: {
@@ -93,14 +64,14 @@ interface LanguageContextType {
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [language, setLanguage] = useState<Language>(
-    (localStorage.getItem("language") as Language) || "en"
+    (localStorage.getItem("language") as Language) || "en",
   );
   useEffect(() => {
     localStorage.setItem("language", language);
