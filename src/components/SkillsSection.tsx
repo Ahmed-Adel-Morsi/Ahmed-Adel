@@ -34,6 +34,7 @@ const SkillsSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
           className="text-3xl md:text-4xl font-display font-bold text-center mb-12"
         >
           {t("skillsTitle")}
@@ -63,17 +64,18 @@ const SkillsSection = () => {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
+            viewport={{ once: true }}
             className="grid gap-8 min-[900px]:gap-10 min-[900px]:grid-cols-2"
           >
             {skillCategories.map((category) => {
               const visibleSkills = (category.skills || []).filter(
-                (skill) => skill.visible !== false
+                (skill) => skill.visible !== false,
               );
               return (
                 <motion.div
                   key={category.title}
                   variants={itemVariants}
-                  className="glass-card relative overflow-hidden p-6 min-[900px]:p-7"
+                  className="glass-card p-6 min-[900px]:p-7"
                 >
                   <div
                     className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${category.accent} opacity-70`}
