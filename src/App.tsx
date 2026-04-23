@@ -1,12 +1,12 @@
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "@/ui/sonner";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
-import Navbar from "./components/Navbar";
-import HeroSection from "./components/HeroSection";
-import ProjectsSection from "./components/ProjectsSection";
-import SkillsSection from "./components/SkillsSection";
-import ContactSection from "./components/ContactSection";
-import Footer from "./components/Footer";
+import Navbar from "./ui/Navbar";
+import HeroSection from "./features/home/HeroSection";
+import ProjectsSection from "./features/projects/ProjectsSection";
+import SkillsSection from "./features/skills/SkillsSection";
+import ContactSection from "./features/contact/ContactSection";
+import Footer from "./ui/Footer";
 
 const App = () => {
   return (
