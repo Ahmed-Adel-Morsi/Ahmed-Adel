@@ -5,11 +5,9 @@ export interface Project {
   titleAr?: string; // Arabic title
   description: string;
   descriptionAr?: string; // Arabic description
-  detailedDescription?: string;
-  detailedDescriptionAr?: string;
   image: string;
   demoUrl: string;
+  repoUrl: string;
   skills?: string[];
-  gallery?: string[];
   order?: number;
 }
