@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { Moon, Sun, Menu } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
@@ -16,7 +15,6 @@ import profilePhoto from "@/assets/profile-photo.webp";
 const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
   const { language, toggleLanguage, t } = useLanguage();
-  const location = useLocation();
   const [activeSection, setActiveSection] = useState("home");
 
   const navItems = [
@@ -40,8 +38,6 @@ const Navbar = () => {
 
   // Track active section based on scroll position
   useEffect(() => {
-    if (location.pathname !== "/") return;
-
     const handleScroll = () => {
       const sections = ["contact", "skills", "projects", "home"];
       const scrollPosition = window.scrollY + 200;
@@ -67,12 +63,9 @@ const Navbar = () => {
     handleScroll(); // Initial check
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [location.pathname]);
+  }, []);
 
-  const isActive = (sectionId: string) => {
-    if (location.pathname !== "/") return false;
-    return activeSection === sectionId;
-  };
+  const isActive = (sectionId: string) => activeSection === sectionId;
 
   return (
     <motion.nav
