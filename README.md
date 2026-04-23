@@ -1,124 +1,202 @@
-# Portfolio Website
+# ✨ Ahmed Adel Portfolio
 
-A modern, responsive portfolio website built with React, TypeScript, and Firebase.
+A production-focused personal portfolio built with React, TypeScript, Tailwind CSS, and Firebase. The site is designed as a single-page experience with bilingual support (English/Arabic), dark and light themes, animated UI, and dynamic project/skills content loaded from Firestore.
 
-## Features
+## 🌍 Overview
 
-- 🎨 Modern UI with Tailwind CSS and Shadcn/ui components
-- 🌍 Multi-language support (English/Arabic)
-- 🌓 Dark/Light theme toggle
-- 📱 Fully responsive design
-- 🔥 Firebase integration for dynamic content
-- ⚡ Fast performance with Vite
-- 🎭 Smooth animations with Framer Motion
+This project showcases frontend engineering skills through:
 
-## Tech Stack
+- 🎨 Modern responsive UI with custom design tokens and glassmorphism effects
+- 🔥 Firestore-driven content for projects and skill categories
+- 🌐 Localization with direction switching (LTR/RTL)
+- 📩 Contact form integration through EmailJS
+- 🔎 SEO and social metadata setup in the root HTML
 
-- **Frontend:** React 18, TypeScript
-- **Styling:** Tailwind CSS, Shadcn/ui
-- **Build Tool:** Vite
-- **Backend:** Firebase (Firestore)
-- **Routing:** React Router
-- **Animation:** Framer Motion
-- **Icons:** Lucide React
+## 🔗 Version URLs
 
-## Getting Started
+- 🚀 Latest version: https://ahmedadel.tech (branch: `main`)
+- 🏷️ v1.0 version: https://v1.ahmedadel.tech (branch: `v1.0`)
 
-### Prerequisites
+## 🚀 Core Features
 
-- Node.js (v18 or higher)
-- npm or bun package manager
+- 🌍 Bilingual interface: English and Arabic translations via context
+- ↔️ Direction-aware layout: automatic LTR/RTL handling on language switch
+- 🌙 Theme system: dark/light mode with persistence in localStorage
+- 🧠 Dynamic portfolio content: projects and skills fetched from Firebase Firestore
+- 🎬 Interactive sections: animated hero, project cards, categorized skills, and contact form
+- 🔔 UI feedback: toast notifications for contact form status
+- 📱 Mobile-first navigation: desktop links + mobile dropdown menu
+- 🧩 SEO baseline: meta tags, Open Graph, Twitter card, and JSON-LD Person schema
 
-### Installation
+## 🛠️ Tech Stack
 
-1. Clone the repository:
+### 💻 Frontend
 
-```bash
-git clone https://github.com/Ahmed-Adel-Morsi/Ahmed-Adel.git
-cd Ahmed-Adel
+- React 18
+- TypeScript
+- Vite 7
+
+### 🎨 Styling and UI
+
+- Tailwind CSS 3
+- tailwindcss-animate
+- class-variance-authority
+- Radix UI primitives (dropdown menu, slot)
+- custom utility components in src/components/ui
+
+### 🎞️ Motion and UX
+
+- Framer Motion
+- Sonner (toast notifications)
+- Lucide React icons
+
+### ☁️ Backend Services
+
+- Firebase App SDK
+- Firebase Firestore
+- Firebase Auth (initialized for future use)
+- EmailJS browser SDK
+
+### ⚙️ Tooling
+
+- ESLint 9 + TypeScript ESLint
+- Prettier
+- SWC React plugin for Vite
+
+## 🧱 Architecture
+
+The application follows a simple layered structure:
+
+- Presentation layer: section components in src/components
+- State/context layer: theme and language providers in src/contexts
+- Data hooks: useProjects and useSkills in src/hooks
+- Service layer: Firestore queries in src/services
+- Domain types and shared setup: src/lib
+
+Data flow:
+
+1. UI components call custom hooks.
+2. Hooks call service functions.
+3. Services query Firestore collections and map data to typed models.
+4. Components render loading, error, and success states.
+
+## 🗂️ Firestore Collections Used
+
+- v2_projects
+  - Ordered by order ascending, then createdAt descending (with fallback query if index is missing)
+- skillCategories
+  - Ordered by order ascending
+
+## 🗺️ Project Structure
+
+```text
+.
+|- src/
+|  |- assets/                 # Static media (profile photo)
+|  |- components/             # Page sections and UI primitives
+|  |  |- ui/                  # Reusable low-level UI components
+|  |- contexts/               # Theme and language providers
+|  |- hooks/                  # Data fetching hooks
+|  |- lib/                    # Firebase bootstrap, types, utilities
+|  |- services/               # Firestore service functions
+|  |- App.tsx                 # App composition (sections + providers)
+|  |- main.tsx                # React app entry
+|  `- index.css               # Global styles and design tokens
+|- public/                    # Favicons, manifest, robots, OG image
+|- index.html                 # SEO metadata and structured data
+|- tailwind.config.ts         # Tailwind theme and animation config
+|- vite.config.ts             # Vite config and path aliases
+`- vercel.json                # SPA rewrite for deployment
 ```
 
-2. Install dependencies:
+## 🔐 Environment Variables
 
-```bash
-npm install
-# or
-bun install
-```
+Create a .env.local file in the project root:
 
-3. Set up environment variables:
-   - Copy `.env.example` to `.env.local`
-   - Fill in your Firebase configuration values
-
-4. Start the development server:
-
-```bash
-npm run dev
-# or
-bun dev
-```
-
-5. Open [http://localhost:8080](http://localhost:8080) in your browser
-
-## Building for Production
-
-```bash
-npm run build
-# or
-bun run build
-```
-
-The production build will be in the `dist` directory.
-
-## Deployment
-
-This project is configured for GitHub Pages deployment:
-
-```bash
-npm run deploy
-# or
-bun run deploy
-```
-
-## Project Structure
-
-```
-src/
-├── components/     # Reusable UI components
-├── contexts/       # React contexts (Theme, Language)
-├── hooks/          # Custom React hooks
-├── lib/            # Utilities and Firebase config
-├── pages/          # Page components
-├── services/       # API service layer
-└── assets/         # Static assets
-```
-
-## Environment Variables
-
-Create a `.env.local` file with the following variables:
-
-```
+```env
+# Firebase
 VITE_FIREBASE_API_KEY=
 VITE_FIREBASE_AUTH_DOMAIN=
 VITE_FIREBASE_PROJECT_ID=
 VITE_FIREBASE_STORAGE_BUCKET=
 VITE_FIREBASE_MESSAGING_SENDER_ID=
 VITE_FIREBASE_APP_ID=
+
+# EmailJS
+VITE_EMAILJS_SERVICE_ID=
+VITE_EMAILJS_TEMPLATE_ID=
+VITE_EMAILJS_PUBLIC_KEY=
 ```
 
-## Scripts
+Notes:
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build locally
-- `npm run lint` - Run ESLint
-- `npm run pretty` - Format code with Prettier
-- `npm run deploy` - Deploy to GitHub Pages
+- Missing Firebase variables can break data loading for Projects and Skills sections.
+- Missing EmailJS variables will prevent contact form submission.
 
-## License
+## 🚀 Getting Started
 
-This project is open source and available under the MIT License.
+### 📋 Prerequisites
 
-## Contact
+- Node.js 18+
+- npm 9+
 
-Ahmed Adel Morsi - [GitHub Profile](https://github.com/Ahmed-Adel-Morsi)
+### 📦 Installation
+
+```bash
+npm install
+```
+
+### ▶️ Run Development Server
+
+```bash
+npm run dev
+```
+
+The app runs on http://localhost:8080 by default.
+
+### 🏗️ Build for Production
+
+```bash
+npm run build
+```
+
+### 👀 Preview Production Build
+
+```bash
+npm run preview
+```
+
+## 🧪 Available Scripts
+
+- npm run dev: start Vite dev server
+- npm run build: create production build
+- npm run build:dev: create development-mode build
+- npm run preview: preview production build locally
+- npm run lint: run ESLint
+- npm run pretty: run Prettier on project files
+
+## 🌐 Deployment
+
+This repository includes:
+
+- vercel.json with SPA rewrite support
+- production build output in dist
+
+Typical Vercel flow:
+
+1. Import repository in Vercel.
+2. Configure environment variables from the list above.
+3. Build command: npm run build
+4. Output directory: dist
+
+## 📝 Known Notes
+
+- The previous README mentioned React Router and GitHub Pages deploy scripts. The current codebase does not use React Router and package scripts do not include a deploy command.
+- A generated dist directory exists in the workspace; source files in src are the canonical implementation.
+
+## 👨‍💻 Author
+
+Ahmed Adel
+
+- GitHub: https://github.com/ahmed-adel-morsi
+- LinkedIn: https://www.linkedin.com/in/ahmed-adel-morsi
