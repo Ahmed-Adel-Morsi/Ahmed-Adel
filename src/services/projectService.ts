@@ -12,10 +12,10 @@ import {
 import { db } from "@/lib/firebase";
 import type { Project } from "@/lib/projects";
 
-const COLLECTION_NAME = "projects";
+const COLLECTION_NAME = "v2_projects";
 
 const mapDocToProject = (
-  doc: DocumentSnapshot<DocumentData> | QueryDocumentSnapshot<DocumentData>
+  doc: DocumentSnapshot<DocumentData> | QueryDocumentSnapshot<DocumentData>,
 ): Project => {
   const data = doc.data() as Omit<Project, "id">;
   return { id: doc.id, ...data };
@@ -28,7 +28,7 @@ export const getAllProjects = async (): Promise<Project[]> => {
     const q = query(
       projectsRef,
       orderBy("order", "asc"),
-      orderBy("createdAt", "desc")
+      orderBy("createdAt", "desc"),
     );
     const querySnapshot = await getDocs(q);
     return querySnapshot.docs.map(mapDocToProject);
