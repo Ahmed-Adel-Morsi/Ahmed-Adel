@@ -1,7 +1,11 @@
 import { motion } from "framer-motion";
+import { CirclePlay } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Link } from "react-router-dom";
+import { Tooltip } from "@/components/ui/tooltip";
+import { GithubIcon } from "./ui/GithubIcon";
+
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useProjects } from "@/hooks/useProjects";
 
@@ -34,6 +38,7 @@ const ProjectsSection = () => {
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="text-3xl md:text-4xl font-display font-bold mb-12 text-start"
         >
@@ -41,8 +46,11 @@ const ProjectsSection = () => {
         </motion.h2>
 
         {loading && (
-          <div className="text-center py-12 text-muted-foreground">
-            {t("loading") || "Loading projects..."}
+          <div className="text-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+            <p className="text-muted-foreground">
+              {t("loading") || "Loading projects..."}
+            </p>
           </div>
         )}
 
@@ -61,13 +69,14 @@ const ProjectsSection = () => {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
+            viewport={{ once: true }}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
             {projects.map((project) => (
               <motion.div
                 key={project.id}
                 variants={itemVariants}
-                className="glass-card hover-lift group flex flex-col h-full"
+                className="glass-card overflow-visible hover-lift group relative z-0 flex h-full flex-col transition-[z-index] hover:z-20 focus-within:z-20"
               >
                 <div className="aspect-video overflow-hidden rounded-t-xl">
                   <img
@@ -96,20 +105,36 @@ const ProjectsSection = () => {
                           <Badge
                             key={skill}
                             variant="outline"
-                            className="rounded-full px-3 py-0.5 text-xs font-medium transition-colors hover:bg-muted hover:text-foreground"
+                            className="rounded-full px-3 py-0.5 text-xs font-medium transition-colors cursor-default"
                           >
                             {skill}
                           </Badge>
                         ))}
                         {project.skills.length > 2 && (
-                          <Link to={`/projects/${project.id}`}>
-                            <Badge
-                              variant="outline"
-                              className="rounded-full px-3 py-0.5 text-xs font-medium transition-colors hover:bg-muted hover:text-foreground"
-                            >
-                              +{project.skills.length - 2}
-                            </Badge>
-                          </Link>
+                          <Tooltip
+                            icon={
+                              <Badge
+                                variant="outline"
+                                className="rounded-full px-3 py-0.5 text-xs font-medium transition-colors cursor-default"
+                              >
+                                +{project.skills.length - 2}
+                              </Badge>
+                            }
+                          >
+                            <div className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                              {t("technologies")}
+                            </div>
+                            <div className="flex flex-wrap justify-center gap-1.5">
+                              {project.skills.map((skill) => (
+                                <span
+                                  key={`${project.id}-${skill}`}
+                                  className="rounded-md border border-border/60 bg-muted/50 px-2 py-0.5 text-[11px]"
+                                >
+                                  {skill}
+                                </span>
+                              ))}
+                            </div>
+                          </Tooltip>
                         )}
                       </div>
                     )}
@@ -120,9 +145,10 @@ const ProjectsSection = () => {
                         size="sm"
                         className="rounded-full hover:bg-muted hover:text-foreground"
                       >
-                        <Link to={`/projects/${project.id}`}>
+                        <a href={project.repoUrl} target="_blank">
+                          <GithubIcon />
                           {t("viewDetails")}
-                        </Link>
+                        </a>
                       </Button>
                       <Button
                         asChild
@@ -135,6 +161,7 @@ const ProjectsSection = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                         >
+                          <CirclePlay />
                           {t("liveDemo")}
                         </a>
                       </Button>
