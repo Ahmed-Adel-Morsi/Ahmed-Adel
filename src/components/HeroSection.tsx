@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useNavigate } from "react-router-dom";
 import profilePhoto from "@/assets/profile-photo.webp";
 
 const valuePoints = [
@@ -39,7 +38,6 @@ const stats = [
 
 const HeroSection = () => {
   const { t, direction, language } = useLanguage();
-  const navigate = useNavigate();
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -77,6 +75,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
             className="flex-shrink-0"
           >
             <div className="relative">
@@ -94,11 +93,13 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
             className="w-full max-w-2xl text-start px-2 sm:px-0"
           >
             <motion.p
               initial={{ opacity: 0, x: direction === "rtl" ? 30 : -30 }}
               whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.6 }}
               className={`text-muted-foreground text-lg ${
                 direction === "rtl" ? "mb-5" : "mb-2"
@@ -110,6 +111,7 @@ const HeroSection = () => {
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ delay: 0.3, duration: 0.6 }}
               className="text-4xl sm:text-5xl md:text-7xl font-display font-bold text-foreground mb-4"
             >
@@ -120,6 +122,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.6 }}
+              viewport={{ once: true }}
               className="text-lg sm:text-xl md:text-2xl text-primary font-semibold mb-6 sm:mb-8"
             >
               {t("role")}
@@ -130,6 +133,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.45, duration: 0.6 }}
+              viewport={{ once: true }}
               className="text-base md:text-lg text-foreground leading-relaxed mb-5 max-w-xl"
             >
               {language === "ar"
@@ -142,6 +146,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.55, duration: 0.6 }}
+              viewport={{ once: true }}
               className="mb-8 space-y-2 text-sm text-foreground/90 ps-1"
             >
               {valuePoints.map((point) => (
@@ -159,15 +164,22 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
+              viewport={{ once: true }}
               className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 w-full sm:w-auto"
             >
               <Button
+                asChild
                 variant="outline"
                 size="sm"
-                onClick={() => navigate("/resume")}
+                onClick={() => {}}
                 className="sm:size-lg rounded-full px-6 sm:px-8 font-medium border-border hover:bg-muted/50"
               >
-                {t("resume") || "Resume"}
+                <a
+                  href="https://drive.google.com/file/d/1Ml1ZGdfIlFAlDZ_mlECEdfBnmiXazLmP/view?usp=sharing"
+                  target="_blank"
+                >
+                  {t("resume") || "Resume"}
+                </a>
               </Button>
               <Button
                 variant="outline"
@@ -191,6 +203,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.6 }}
+              viewport={{ once: true }}
               className="mt-6 flex flex-wrap gap-2 sm:gap-4 text-xs sm:text-sm"
             >
               {stats.map((stat) => (
@@ -219,6 +232,7 @@ const HeroSection = () => {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.6 }}
+        viewport={{ once: true }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
         <motion.div
