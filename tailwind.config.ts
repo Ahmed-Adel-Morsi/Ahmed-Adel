@@ -12,7 +12,7 @@ export default {
   safelist: [
     {
       pattern:
-        /^(from|to)-(sky|emerald|violet|amber|blue|purple)-(400|600)\/(5|20)$/,
+        /^(from|to)-(sky|emerald|violet|amber|blue|purple|rose|cyan|orange|teal|lime)-(400|600)\/(5|20)$/,
     },
   ],
   prefix: "",
