@@ -38,6 +38,10 @@ const translations: Translations = {
   viewDetails: { en: "View Details", ar: "عرض التفاصيل" },
   liveDemo: { en: "Live Demo", ar: "عرض مباشر" },
   technologies: { en: "Technologies Used", ar: "التقنيات المستخدمة" },
+  previous: { en: "Previous", ar: "السابق" },
+  next: { en: "Next", ar: "التالي" },
+  page: { en: "Page", ar: "الصفحة" },
+  of: { en: "of", ar: "من" },
 
   // Skills
   skillsTitle: { en: "Skills & Technologies", ar: "المهارات والتقنيات" },
