@@ -12,6 +12,7 @@ import {
 import { db } from "@/lib/firebase";
 import type { Project } from "@/lib/projects";
 
+// const COLLECTION_NAME = "projects";
 const COLLECTION_NAME = "v2_projects";
 
 const mapDocToProject = (
