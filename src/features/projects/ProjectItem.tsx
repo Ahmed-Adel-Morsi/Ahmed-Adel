@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 
 import { useLanguage } from "@/contexts/LanguageContext";
 import ProjectButtonGroup from "./ProjectButtonGroup";
+import ProjectResponsiveBadge from "./ProjectResponsiveBadge";
 import ProjectSkillsList from "./ProjectSkillsList";
 
 const itemVariants = {
@@ -25,6 +26,7 @@ const ProjectItem = ({ project }) => {
     skills,
     repoUrl,
     demoUrl,
+    responsive,
   } = project;
 
   return (
@@ -33,6 +35,7 @@ const ProjectItem = ({ project }) => {
       variants={itemVariants}
       className="glass-card overflow-visible hover-lift group relative z-0 flex h-full flex-col transition-[z-index] hover:z-20 focus-within:z-20"
     >
+      <ProjectResponsiveBadge responsive={responsive} />
       <div className="aspect-video overflow-hidden rounded-t-xl">
         <img
           src={image}
