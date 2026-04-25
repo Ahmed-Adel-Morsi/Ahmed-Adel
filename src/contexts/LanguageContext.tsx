@@ -42,6 +42,8 @@ const translations: Translations = {
   next: { en: "Next", ar: "التالي" },
   page: { en: "Page", ar: "الصفحة" },
   of: { en: "of", ar: "من" },
+  responsive: { en: "Responsive", ar: "متجاوب" },
+  desktopOnly: { en: "Desktop Only", ar: "للكمبيوتر فقط" },
 
   // Skills
   skillsTitle: { en: "Skills & Technologies", ar: "المهارات والتقنيات" },
