@@ -10,4 +10,5 @@ export interface Project {
   repoUrl: string;
   skills?: string[];
   order?: number;
+  responsive?: boolean;
 }
