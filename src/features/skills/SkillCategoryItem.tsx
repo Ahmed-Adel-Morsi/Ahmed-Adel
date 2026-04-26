@@ -35,7 +35,7 @@ const SkillCategoryItem = ({ category }) => {
           <h3 className="text-lg font-semibold tracking-tight">
             {language === "ar" && arTitle ? arTitle : title}
           </h3>
-          <span className="rounded-full border border-border/40 bg-background/60 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur">
+          <span className="shrink-0 rounded-full border border-border/40 bg-background/60 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur">
             {visibleSkills.length} {language === "ar" ? "مهارات" : "skills"}
           </span>
         </div>
