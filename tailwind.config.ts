@@ -20,12 +20,10 @@ export default {
     container: {
       center: true,
       padding: {
-        DEFAULT: "1rem",
-        xs: "1.5rem",
+        DEFAULT: "1.5rem",
         sm: "2rem",
       },
       screens: {
-        xs: "400px",
         "2xl": "1400px",
       },
     },
