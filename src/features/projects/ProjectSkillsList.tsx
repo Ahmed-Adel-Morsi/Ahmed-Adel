@@ -16,7 +16,7 @@ const ProjectSkillsList = ({ skills }) => {
             <Tooltip
               icon={<ProjectSkillItem skill={`+${skills.length - 2}`} />}
             >
-              <div className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+              <div className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground text-center">
                 {t("technologies")}
               </div>
               <div className="flex flex-wrap justify-center gap-1.5">
