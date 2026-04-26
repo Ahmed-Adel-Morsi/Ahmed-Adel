@@ -36,7 +36,11 @@ function Tooltip({
             )}
           >
             {children}
-            <TooltipPrimitive.Arrow className="fill-card/95 stroke-border/70 [stroke-width:1px]" width={16} height={8} />
+            <TooltipPrimitive.Arrow
+              className="fill-card/95 stroke-border/70 [stroke-width:1px]"
+              width={16}
+              height={8}
+            />
           </TooltipPrimitive.Content>
         </TooltipPrimitive.Portal>
       </TooltipPrimitive.Root>
