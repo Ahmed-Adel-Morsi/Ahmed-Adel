@@ -27,6 +27,9 @@ This project showcases frontend engineering skills through:
 - 🔔 UI feedback: toast notifications for contact form status
 - 📱 Mobile-first navigation: desktop links + mobile dropdown menu
 - 🧩 SEO baseline: meta tags, Open Graph, Twitter card, and JSON-LD Person schema
+- 🧭 Paginated project list with smooth navigation
+- 🧷 Project responsiveness badges (responsive vs desktop-only)
+- 🧩 Enhanced tooltips with touch-device support
 
 ## 🛠️ Tech Stack
 
@@ -41,8 +44,8 @@ This project showcases frontend engineering skills through:
 - Tailwind CSS 3
 - tailwindcss-animate
 - class-variance-authority
-- Radix UI primitives (dropdown menu, slot)
-- custom utility components in src/components/ui
+- Radix UI primitives (dropdown menu, tooltip, slot)
+- custom UI primitives in src/ui
 
 ### 🎞️ Motion and UX
 
@@ -67,7 +70,7 @@ This project showcases frontend engineering skills through:
 
 The application follows a simple layered structure:
 
-- Presentation layer: section components in src/components
+- Presentation layer: feature modules in src/features
 - State/context layer: theme and language providers in src/contexts
 - Data hooks: useProjects and useSkills in src/hooks
 - Service layer: Firestore queries in src/services
@@ -93,8 +96,8 @@ Data flow:
 .
 |- src/
 |  |- assets/                 # Static media (profile photo)
-|  |- components/             # Page sections and UI primitives
-|  |  |- ui/                  # Reusable low-level UI components
+|  |- features/               # Feature modules (home, projects, skills, contact)
+|  |- ui/                     # Reusable low-level UI components
 |  |- contexts/               # Theme and language providers
 |  |- hooks/                  # Data fetching hooks
 |  |- lib/                    # Firebase bootstrap, types, utilities
