@@ -110,7 +110,7 @@ const ContactForm = () => {
         />
       </div>
 
-      <div className="flex justify-start">
+      <div className="flex justify-end">
         <Button
           type="submit"
           size="lg"
