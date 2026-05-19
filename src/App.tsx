@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import { Toaster } from "@/ui/sonner";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
@@ -24,6 +25,7 @@ const App = () => {
           <Footer />
         </div>
       </LanguageProvider>
+      <Analytics />
     </ThemeProvider>
   );
 };
